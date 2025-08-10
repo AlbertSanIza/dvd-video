@@ -10,6 +10,9 @@
     "editor.quickSuggestions": {
         "strings": "on"
     },
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
     "git.autofetch": true,
     "git.confirmSync": false,
     "github.copilot.enable": {
