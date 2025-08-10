@@ -1,0 +1,23 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.linkedEditing": true,
+    "editor.quickSuggestions": {
+        "strings": "on"
+    },
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "github.copilot.enable": {
+        "*": true,
+        "markdown": true,
+        "plaintext": false,
+        "scminput": false
+    },
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "workbench.iconTheme": "material-icon-theme"
+}
