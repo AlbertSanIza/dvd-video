@@ -1,3 +1,11 @@
 {
-    "recommendations": ["eamodio.gitlens"]
+    "recommendations": [
+        "bradlc.vscode-tailwindcss",
+        "chakrounanas.turbo-console-log",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "github.copilot",
+        "pkief.material-icon-theme",
+        "shardulm94.trailing-spaces"
+    ]
 }
