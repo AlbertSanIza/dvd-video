@@ -3,8 +3,6 @@ import './style.css'
 class DVDVideo {
     canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
     ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
-    width = 0
-    height = 0
 
     constructor() {
         this.setupEventListeners()
