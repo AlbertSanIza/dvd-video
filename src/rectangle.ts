@@ -10,8 +10,4 @@ export class Rectangle {
         this.width = width
         this.height = height
     }
-
-    get center() {
-        return this.position.y + this.height / 2
-    }
 }
