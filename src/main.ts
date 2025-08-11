@@ -27,7 +27,9 @@ class DVDVideo {
         this.velocity = new Point(speed * dirX, speed * dirY)
 
         this.logo.src = `${import.meta.env.BASE_URL}/logo.png`
-        requestAnimationFrame((t) => this.gameLoop(t))
+        this.logo.onload = () => {
+            requestAnimationFrame(this.gameLoop)
+        }
     }
 
     private resize() {
