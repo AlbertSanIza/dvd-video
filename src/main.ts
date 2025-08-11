@@ -2,15 +2,19 @@ import { Point } from './point'
 import { Rectangle } from './rectangle'
 import './style.css'
 
+const COLORS = ['red', 'blue', 'green', 'yellow', 'purple', 'orange']
 const SPEED = 240
 
 class DVDVideo {
     private canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
     private ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
-    private logo = new Image()
 
+    private logo = new Image()
     private square: Rectangle
     private direction: Point
+    private colorIndex = 0
+    private color: string = COLORS[0]
+
     private lastTime = 0
 
     constructor() {
@@ -35,21 +39,30 @@ class DVDVideo {
     }
 
     private update(dt: number) {
+        let hasHit = false
         this.square.position.x += this.direction.x * SPEED * dt
         this.square.position.y += this.direction.y * SPEED * dt
         if (this.square.position.x <= 0) {
             this.square.position.x = 0
             this.direction.x *= -1
+            hasHit = true
         } else if (this.square.position.x + this.square.width >= this.canvas.width) {
             this.square.position.x = this.canvas.width - this.square.width
             this.direction.x *= -1
+            hasHit = true
         }
         if (this.square.position.y <= 0) {
             this.square.position.y = 0
             this.direction.y *= -1
+            hasHit = true
         } else if (this.square.position.y + this.square.height >= this.canvas.height) {
             this.square.position.y = this.canvas.height - this.square.height
             this.direction.y *= -1
+            hasHit = true
+        }
+        if (hasHit) {
+            this.colorIndex = (this.colorIndex + 1) % COLORS.length
+            this.color = COLORS[this.colorIndex]
         }
     }
 
@@ -57,7 +70,7 @@ class DVDVideo {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
         // Rectangle
-        this.ctx.fillStyle = 'red'
+        this.ctx.fillStyle = this.color
         this.ctx.fillRect(this.square.position.x, this.square.position.y, this.square.width, this.square.height)
 
         // Image
