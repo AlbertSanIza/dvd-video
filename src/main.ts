@@ -13,6 +13,7 @@ class DVDVideo {
     private lastTime = 0
 
     constructor() {
+        this.setupEventListeners()
         this.resize()
         const size = 200
         this.square = new Rectangle(
@@ -20,14 +21,12 @@ class DVDVideo {
             size,
             size
         )
-
         const speed = 240
         const dirX = Math.random() < 0.5 ? -1 : 1
         const dirY = Math.random() < 0.5 ? -1 : 1
         this.velocity = new Point(speed * dirX, speed * dirY)
 
         this.logo.src = `${import.meta.env.BASE_URL}/logo.png`
-        this.setupEventListeners()
         requestAnimationFrame((t) => this.gameLoop(t))
     }
 
