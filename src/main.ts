@@ -6,10 +6,8 @@ class DVDVideo {
     private logo = new Image()
 
     constructor() {
-        this.loadImage()
-        this.setupEventListeners()
-        this.gameLoop()
     }
+        this.resize()
 
     private loadImage() {
         this.logo.src = `${import.meta.env.BASE_URL}/logo.png`
