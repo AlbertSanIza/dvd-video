@@ -5,27 +5,18 @@ import './style.css'
 class DVDVideo {
     private canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
     private ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
-
-    private square: Rectangle
     private logo = new Image()
 
+    private square: Rectangle
     private velocity: Point
     private lastTime = 0
 
     constructor() {
         this.setupEventListeners()
         this.resize()
-        const size = 200
-        this.square = new Rectangle(
-            new Point(Math.random() * Math.max(1, this.canvas.width - size), Math.random() * Math.max(1, this.canvas.height - size)),
-            size,
-            size
-        )
+        this.square = new Rectangle(new Point(Math.random() * Math.max(1, this.canvas.width), Math.random() * Math.max(1, this.canvas.height)), 200, 200)
         const speed = 240
-        const dirX = Math.random() < 0.5 ? -1 : 1
-        const dirY = Math.random() < 0.5 ? -1 : 1
-        this.velocity = new Point(speed * dirX, speed * dirY)
-
+        this.velocity = new Point(speed * (Math.random() < 0.5 ? -1 : 1), speed * (Math.random() < 0.5 ? -1 : 1))
         this.logo.src = `${import.meta.env.BASE_URL}/logo.png`
         this.logo.onload = () => {
             requestAnimationFrame(this.gameLoop)
