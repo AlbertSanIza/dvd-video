@@ -21,7 +21,25 @@ class DVDVideo {
         window.addEventListener('resize', () => this.resize())
     }
 
-    private update() {}
+    private update(dt: number) {
+        this.rectangle.position.x += this.velocity.x * dt
+        this.rectangle.position.y += this.velocity.y * dt
+        if (this.rectangle.position.x <= 0) {
+            this.rectangle.position.x = 0
+            this.velocity.x *= -1
+        } else if (this.rectangle.position.x + this.rectangle.width >= this.canvas.width) {
+            this.rectangle.position.x = this.canvas.width - this.rectangle.width
+            this.velocity.x *= -1
+        }
+        if (this.rectangle.position.y <= 0) {
+            this.rectangle.position.y = 0
+            this.velocity.y *= -1
+        } else if (this.rectangle.position.y + this.rectangle.height >= this.canvas.height) {
+            this.rectangle.position.y = this.canvas.height - this.rectangle.height
+            this.velocity.y *= -1
+        }
+    }
+
 
     private draw() {}
 
