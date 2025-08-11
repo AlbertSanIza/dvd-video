@@ -5,6 +5,7 @@ import './style.css'
 class DVDVideo {
     private canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
     private ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
+
     private square: Rectangle
     private logo = new Image()
 
@@ -79,7 +80,7 @@ class DVDVideo {
     }
 
     private gameLoop = (time: number) => {
-        const dt = this.lastTime ? (time - this.lastTime) / 1000 : 0
+        const dt = (time - this.lastTime) / 1000
         this.lastTime = time
         this.update(dt)
         this.draw()
