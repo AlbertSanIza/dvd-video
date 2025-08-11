@@ -2,7 +2,7 @@ import { Point } from './point'
 import { Rectangle } from './rectangle'
 import './style.css'
 
-const COLORS = ['red', 'blue', 'green', 'yellow', 'purple', 'orange']
+const COLORS = ['red', 'blue', 'green']
 const SPEED = 240
 
 class DVDVideo {
