@@ -41,10 +41,6 @@ class DVDVideo {
 
     private setupEventListeners() {
         window.addEventListener('resize', () => this.resize())
-        // If the tab was backgrounded, delta can spike; clamp on visibility
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible') this.lastTime = 0
-        })
     }
 
     private centerStart() {
