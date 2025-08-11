@@ -1,6 +1,5 @@
 import './style.css'
-
-type Vec2 = { x: number; y: number }
+import type { Vec2 } from './types'
 
 class DVDVideo {
     canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
