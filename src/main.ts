@@ -40,8 +40,24 @@ class DVDVideo {
         }
     }
 
+    private draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
-    private draw() {}
+        // Rectangle
+        this.ctx.fillStyle = 'red'
+        this.ctx.fillRect(this.rectangle.position.x, this.rectangle.position.y, this.rectangle.width, this.rectangle.height)
+
+        // Image
+        const padding = 0.05
+        const maxW = this.rectangle.width * (1 - padding * 2)
+        const maxH = this.rectangle.height * (1 - padding * 2)
+        const scale = Math.min(maxW / this.logo.width, maxH / this.logo.height)
+        const drawW = this.logo.width * scale
+        const drawH = this.logo.height * scale
+        const drawX = this.rectangle.position.x + (this.rectangle.width - drawW) / 2
+        const drawY = this.rectangle.position.y + (this.rectangle.height - drawH) / 2
+        this.ctx.drawImage(this.logo, drawX, drawY, drawW, drawH)
+    }
 
     private gameLoop = (time: number) => {
         const dt = this.lastTime ? (time - this.lastTime) / 1000 : 0
