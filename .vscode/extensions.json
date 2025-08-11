@@ -5,6 +5,7 @@
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
         "github.copilot",
+        "github.vscode-github-actions",
         "pkief.material-icon-theme",
         "shardulm94.trailing-spaces"
     ]
