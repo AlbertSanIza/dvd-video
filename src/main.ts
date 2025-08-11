@@ -3,7 +3,8 @@ import { Rectangle } from './rectangle'
 import './style.css'
 
 const COLORS = ['red', 'blue', 'green']
-const SPEED = 240
+const SIZE = 300
+const SPEED = 260
 
 class DVDVideo {
     private canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
@@ -20,7 +21,7 @@ class DVDVideo {
     constructor() {
         this.setupEventListeners()
         this.resize()
-        this.square = new Rectangle(new Point(Math.random() * Math.max(1, this.canvas.width), Math.random() * Math.max(1, this.canvas.height)), 200, 200)
+        this.square = new Rectangle(new Point(Math.random() * Math.max(1, this.canvas.width), Math.random() * Math.max(1, this.canvas.height)), SIZE, SIZE)
         this.direction = new Point(Math.random() < 0.5 ? -1 : 1, Math.random() < 0.5 ? -1 : 1)
         this.logo.onload = () => {
             requestAnimationFrame(this.gameLoop)
