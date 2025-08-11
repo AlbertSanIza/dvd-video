@@ -2,21 +2,22 @@ import { Point } from './point'
 import { Rectangle } from './rectangle'
 import './style.css'
 
+const SPEED = 240
+
 class DVDVideo {
     private canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
     private ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
     private logo = new Image()
 
     private square: Rectangle
-    private velocity: Point
+    private direction: Point
     private lastTime = 0
 
     constructor() {
         this.setupEventListeners()
         this.resize()
         this.square = new Rectangle(new Point(Math.random() * Math.max(1, this.canvas.width), Math.random() * Math.max(1, this.canvas.height)), 200, 200)
-        const speed = 240
-        this.velocity = new Point(speed * (Math.random() < 0.5 ? -1 : 1), speed * (Math.random() < 0.5 ? -1 : 1))
+        this.direction = new Point(SPEED * (Math.random() < 0.5 ? -1 : 1), SPEED * (Math.random() < 0.5 ? -1 : 1))
         this.logo.src = `${import.meta.env.BASE_URL}/logo.png`
         this.logo.onload = () => {
             requestAnimationFrame(this.gameLoop)
@@ -34,21 +35,21 @@ class DVDVideo {
     }
 
     private update(dt: number) {
-        this.square.position.x += this.velocity.x * dt
-        this.square.position.y += this.velocity.y * dt
+        this.square.position.x += this.direction.x * dt
+        this.square.position.y += this.direction.y * dt
         if (this.square.position.x <= 0) {
             this.square.position.x = 0
-            this.velocity.x *= -1
+            this.direction.x *= -1
         } else if (this.square.position.x + this.square.width >= this.canvas.width) {
             this.square.position.x = this.canvas.width - this.square.width
-            this.velocity.x *= -1
+            this.direction.x *= -1
         }
         if (this.square.position.y <= 0) {
             this.square.position.y = 0
-            this.velocity.y *= -1
+            this.direction.y *= -1
         } else if (this.square.position.y + this.square.height >= this.canvas.height) {
             this.square.position.y = this.canvas.height - this.square.height
-            this.velocity.y *= -1
+            this.direction.y *= -1
         }
     }
 
