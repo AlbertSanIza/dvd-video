@@ -5,7 +5,7 @@ import './style.css'
 class DVDVideo {
     private canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
     private ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
-    private rectangle: Rectangle
+    private square: Rectangle
     private logo = new Image()
 
     private velocity: Point
@@ -14,7 +14,7 @@ class DVDVideo {
     constructor() {
         this.resize()
         const size = 200
-        this.rectangle = new Rectangle(
+        this.square = new Rectangle(
             new Point(Math.random() * Math.max(1, this.canvas.width - size), Math.random() * Math.max(1, this.canvas.height - size)),
             size,
             size
@@ -41,20 +41,20 @@ class DVDVideo {
     }
 
     private update(dt: number) {
-        this.rectangle.position.x += this.velocity.x * dt
-        this.rectangle.position.y += this.velocity.y * dt
-        if (this.rectangle.position.x <= 0) {
-            this.rectangle.position.x = 0
+        this.square.position.x += this.velocity.x * dt
+        this.square.position.y += this.velocity.y * dt
+        if (this.square.position.x <= 0) {
+            this.square.position.x = 0
             this.velocity.x *= -1
-        } else if (this.rectangle.position.x + this.rectangle.width >= this.canvas.width) {
-            this.rectangle.position.x = this.canvas.width - this.rectangle.width
+        } else if (this.square.position.x + this.square.width >= this.canvas.width) {
+            this.square.position.x = this.canvas.width - this.square.width
             this.velocity.x *= -1
         }
-        if (this.rectangle.position.y <= 0) {
-            this.rectangle.position.y = 0
+        if (this.square.position.y <= 0) {
+            this.square.position.y = 0
             this.velocity.y *= -1
-        } else if (this.rectangle.position.y + this.rectangle.height >= this.canvas.height) {
-            this.rectangle.position.y = this.canvas.height - this.rectangle.height
+        } else if (this.square.position.y + this.square.height >= this.canvas.height) {
+            this.square.position.y = this.canvas.height - this.square.height
             this.velocity.y *= -1
         }
     }
@@ -64,17 +64,17 @@ class DVDVideo {
 
         // Rectangle
         this.ctx.fillStyle = 'red'
-        this.ctx.fillRect(this.rectangle.position.x, this.rectangle.position.y, this.rectangle.width, this.rectangle.height)
+        this.ctx.fillRect(this.square.position.x, this.square.position.y, this.square.width, this.square.height)
 
         // Image
         const padding = 0.05
-        const maxW = this.rectangle.width * (1 - padding * 2)
-        const maxH = this.rectangle.height * (1 - padding * 2)
+        const maxW = this.square.width * (1 - padding * 2)
+        const maxH = this.square.height * (1 - padding * 2)
         const scale = Math.min(maxW / this.logo.width, maxH / this.logo.height)
         const drawW = this.logo.width * scale
         const drawH = this.logo.height * scale
-        const drawX = this.rectangle.position.x + (this.rectangle.width - drawW) / 2
-        const drawY = this.rectangle.position.y + (this.rectangle.height - drawH) / 2
+        const drawX = this.square.position.x + (this.square.width - drawW) / 2
+        const drawY = this.square.position.y + (this.square.height - drawH) / 2
         this.ctx.drawImage(this.logo, drawX, drawY, drawW, drawH)
     }
 
