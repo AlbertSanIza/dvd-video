@@ -2,11 +2,11 @@ import './style.css'
 
 class DVDVideo {
     canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
+    ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
     width = 0
     height = 0
 
     constructor() {
-        this.init()
         this.setupEventListeners()
     }
 
@@ -20,15 +20,13 @@ class DVDVideo {
         window.addEventListener('resize', () => this.resize())
     }
 
+    private update() {}
+
+    private draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
 
-    init() {}
-
-    update() {}
-
-    draw() {}
-
-    gameLoop() {
+    private gameLoop() {
         this.update()
         this.draw()
         requestAnimationFrame(() => this.gameLoop())
