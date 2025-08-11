@@ -1,14 +1,33 @@
+import { Point } from './point'
+import { Rectangle } from './rectangle'
 import './style.css'
 
 class DVDVideo {
     private canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
     private ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
+    private rectangle: Rectangle
     private logo = new Image()
+
+    private velocity: Point
+    private lastTime = 0
 
     constructor() {
         this.resize()
+        const size = 200
+        this.rectangle = new Rectangle(
+            new Point(Math.random() * Math.max(1, this.canvas.width - size), Math.random() * Math.max(1, this.canvas.height - size)),
+            size,
+            size
+        )
+
+        const speed = 240
+        const dirX = Math.random() < 0.5 ? -1 : 1
+        const dirY = Math.random() < 0.5 ? -1 : 1
+        this.velocity = new Point(speed * dirX, speed * dirY)
 
         this.logo.src = `${import.meta.env.BASE_URL}/logo.png`
+        this.setupEventListeners()
+        requestAnimationFrame((t) => this.gameLoop(t))
     }
 
     private resize() {
