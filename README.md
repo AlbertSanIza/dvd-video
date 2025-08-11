@@ -2,6 +2,8 @@
 
 [![Deploy to Pages](https://github.com/AlbertSanIza/dvd-video/actions/workflows/deploy.yml/badge.svg)](https://github.com/AlbertSanIza/dvd-video/actions/workflows/deploy.yml)
 
+![dvd](https://github.com/user-attachments/assets/e998e2d3-5cce-476f-b763-cb3bf8098583)
+
 A nostalgic recreation of the classic DVD screensaver animation that bounces around your screen and changes colors when it hits the edges. Built with TypeScript, Vite, and HTML5 Canvas.
 
 🌐 **[Live Demo](https://albertsaniza.github.io/dvd-video)**
