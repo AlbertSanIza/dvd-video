@@ -17,11 +17,11 @@ class DVDVideo {
         this.setupEventListeners()
         this.resize()
         this.square = new Rectangle(new Point(Math.random() * Math.max(1, this.canvas.width), Math.random() * Math.max(1, this.canvas.height)), 200, 200)
-        this.direction = new Point(SPEED * (Math.random() < 0.5 ? -1 : 1), SPEED * (Math.random() < 0.5 ? -1 : 1))
-        this.logo.src = `${import.meta.env.BASE_URL}/logo.png`
+        this.direction = new Point(Math.random() < 0.5 ? -1 : 1, Math.random() < 0.5 ? -1 : 1)
         this.logo.onload = () => {
             requestAnimationFrame(this.gameLoop)
         }
+        this.logo.src = `${import.meta.env.BASE_URL}/logo.png`
     }
 
     private resize() {
@@ -35,8 +35,8 @@ class DVDVideo {
     }
 
     private update(dt: number) {
-        this.square.position.x += this.direction.x * dt
-        this.square.position.y += this.direction.y * dt
+        this.square.position.x += this.direction.x * SPEED * dt
+        this.square.position.y += this.direction.y * SPEED * dt
         if (this.square.position.x <= 0) {
             this.square.position.x = 0
             this.direction.x *= -1
