@@ -11,6 +11,7 @@ class DVDVideo {
     private ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
 
     private logo = new Image()
+    private logoSize: { width: number; height: number } = { width: 0, height: 0 }
     private square: Rectangle
     private direction: Point
     private colorIndex = 0
@@ -24,6 +25,11 @@ class DVDVideo {
         this.square = new Rectangle(new Point(Math.random() * Math.max(1, this.canvas.width), Math.random() * Math.max(1, this.canvas.height)), SIZE, SIZE)
         this.direction = new Point(Math.random() < 0.5 ? -1 : 1, Math.random() < 0.5 ? -1 : 1)
         this.logo.onload = () => {
+            const padding = 0.05
+            const maxW = this.square.width * (1 - padding * 2)
+            const maxH = this.square.height * (1 - padding * 2)
+            const scale = Math.min(maxW / this.logo.width, maxH / this.logo.height)
+            this.logoSize = { width: this.logo.width * scale, height: this.logo.height * scale }
             requestAnimationFrame(this.gameLoop)
         }
         this.logo.src = `${import.meta.env.BASE_URL}/logo.png`
@@ -74,16 +80,14 @@ class DVDVideo {
         this.ctx.fillStyle = this.color
         this.ctx.fillRect(this.square.position.x, this.square.position.y, this.square.width, this.square.height)
 
-        // Image
-        const padding = 0.05
-        const maxW = this.square.width * (1 - padding * 2)
-        const maxH = this.square.height * (1 - padding * 2)
-        const scale = Math.min(maxW / this.logo.width, maxH / this.logo.height)
-        const drawW = this.logo.width * scale
-        const drawH = this.logo.height * scale
-        const drawX = this.square.position.x + (this.square.width - drawW) / 2
-        const drawY = this.square.position.y + (this.square.height - drawH) / 2
-        this.ctx.drawImage(this.logo, drawX, drawY, drawW, drawH)
+        // Logo
+        this.ctx.drawImage(
+            this.logo,
+            this.square.position.x + (this.square.width - this.logoSize.width) / 2,
+            this.square.position.y + (this.square.height - this.logoSize.height) / 2,
+            this.logoSize.width,
+            this.logoSize.height
+        )
     }
 
     private gameLoop = (time: number) => {
