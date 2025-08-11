@@ -43,10 +43,12 @@ class DVDVideo {
 
     private draw() {}
 
-    private gameLoop() {
-        this.update()
+    private gameLoop = (time: number) => {
+        const dt = this.lastTime ? (time - this.lastTime) / 1000 : 0
+        this.lastTime = time
+        this.update(dt)
         this.draw()
-        requestAnimationFrame(() => this.gameLoop())
+        requestAnimationFrame(this.gameLoop)
     }
 }
 
