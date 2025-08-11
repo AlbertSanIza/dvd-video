@@ -2,8 +2,9 @@ import './style.css'
 import type { Vec2 } from './types'
 
 class DVDVideo {
-    canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
-    ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
+    private canvas: HTMLCanvasElement = document.getElementById('dvd-video-canvas') as HTMLCanvasElement
+    private ctx: CanvasRenderingContext2D = this.canvas.getContext('2d') as CanvasRenderingContext2D
+    private logo = new Image()
 
     // Bouncing rectangle properties
     size = { w: 200, h: 120 }
